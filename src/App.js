@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Menu from "./components/menu";
+import Channel from "./components/channel";
+import ChannelSingle from "./components/channel/ChannelSingle";
+import Program from "./components/program";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <Menu />
+        <div>
+          <Switch>
+            <Route exact path="/" render={() => <Channel />} />
+            <Route path="/program" render={() => <Program />} />
+            <Route path="/channels/:id" render={(props) => <ChannelSingle {...props}/>} />
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
-}
+};
 
 export default App;
